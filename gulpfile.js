@@ -24,5 +24,9 @@ gulp.task('clean', function (cb) {
   rimraf('./dist', cb);
 });
 
+gulp.task('watch', () => {
+  gulp.watch(['src/**/*.js', 'src/*.js'], ['default']);
+});
+
 
 gulp.task('default', ['build']);
