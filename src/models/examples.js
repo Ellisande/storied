@@ -1,10 +1,7 @@
 import _ from 'lodash';
 
 class Examples {
-  constructor(variableNames, rows = []){
-    if(!variableNames || variableNames.length === 0){
-      throw new Error(`An array of variable names is required to create an examples table. Expected an array, got: ${variableNames}`);
-    }
+  constructor(variableNames = [], rows = []){
     this.varNames = [...variableNames];
     this.rows = [...rows];
   }
@@ -17,8 +14,11 @@ class Examples {
   }
   addRow(values){
     const arrayOfValues = _.toArray(values);
-    if(arrayOfValues.length > this.headings.length){
+    if(this.headings === 0 && arrayOfValues.length > this.headings.length){
       throw new Error(`Too many values were provided in the field. Expected one for each of the ${this.headings.length} columns [${this.headings}] but got [${arrayOfValues}]`);
+    }
+    if(!this.headings){
+      return new Examples(arrayOfValues);
     }
     return new Examples(this.varNames, [...this.rows, arrayOfValues]);
   }
@@ -30,6 +30,9 @@ class Examples {
   }
   forEach(cb){
     this.rows.forEach((row, index) => cb(this.getRow(index)));
+  }
+  toString(){
+    return '\nExamples:\n|' + this.rows.reduce((fullString, row) => `${fullString}| ${row.join(' | ')} \n`, '');
   }
 }
 

@@ -28,7 +28,6 @@ class Meta {
     newData[metaData.key] = newData[metaData.key] || [];
     newData[metaData.key] = [...newData[metaData.key], metaData.value];
     Object.freeze(newData[metaData.key]);
-    console.log(1, newData);
     return new Meta(newData);
   }
   toString(){

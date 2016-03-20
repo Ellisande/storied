@@ -12,16 +12,6 @@ describe('examples', () => {
       expect(exampleTable.headings).not.to.equal(columns);
     });
 
-    it('should throw an error if an array of variable names is not provided', done => {
-      try {
-        new Examples();
-      } catch (err) {
-        expect(err).to.be.ok;
-        return done();
-      }
-      return done('Expected error from constructor');
-    });
-
     it('should accept variable names and a set of rows', () => {
       const rows = [
         ['Justin', 31],

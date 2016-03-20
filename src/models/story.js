@@ -1,4 +1,5 @@
 import {Meta} from '../models/meta';
+import Examples from '../models/examples';
 class Story {
   constructor(scenario){
     this.scenario = scenario;
@@ -6,7 +7,7 @@ class Story {
     this.given = [];
     this.when = [];
     this.then = [];
-    this.examples = [];
+    this.examples = new Examples();
   }
   addStep(step){
     this[step.type].push(step);
@@ -17,13 +18,17 @@ class Story {
   addMetaData(metaData){
     this.meta = this.meta.add(metaData);
   }
+  addExampleRow(row){
+    this.examples = this.examples.addRow(row);
+  }
   toString(){
     const scenario = `Scenario: ${this.scenario}`;
     const meta = this.meta.toString();
     const given = 'Given' + this.given.join('\nAnd');
     const when = 'When' + this.when.join('\nAnd');
     const then = 'Then' + this.then.join('\nAnd');
-    return `${scenario}\n${meta}\n${given}\n${when}\n${then}`;
+    const examples = this.examples.toString();
+    return `${scenario}\n${meta}\n${given}\n${when}\n${then}\n${examples}`;
   }
   validate(){
     return false;

@@ -2,8 +2,9 @@ import Story from './models/story';
 import StepParser from './parsers/stepParser';
 import ScenarioParser from './parsers/scenarioParser';
 import {MetaDataParser, MetaParser} from './parsers/metaParser';
+import {ExampleRowParser, ExampleHeaderParser, ExampleParser} from './parsers/examplesParser';
 
-const parsers = [StepParser, ScenarioParser, MetaParser, MetaDataParser];
+const parsers = [StepParser, ScenarioParser, MetaParser, MetaDataParser, ExampleRowParser, ExampleHeaderParser, ExampleParser];
 
 var fs = require('fs');
 fs.readFile(process.cwd() + '/test/stories/test.story', function(err, data) {
@@ -30,6 +31,9 @@ fs.readFile(process.cwd() + '/test/stories/test.story', function(err, data) {
     }
     if(parsedLine.step){
       myStory.addStep(parsedLine.step);
+    }
+    if(parsedLine.exampleRow){
+      myStory.addExampleRow(parsedLine.exampleRow);
     }
     lastSection = parsedLine.section;
   });
