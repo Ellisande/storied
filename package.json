@@ -13,7 +13,8 @@
   "keywords": [
     "story",
     "parser",
-    "jbehave"
+    "jbehave",
+    "jsbehave"
   ],
   "author": "Ellisande",
   "license": "MIT",
@@ -34,8 +35,10 @@
     "gulp-babel": "^6.1.2",
     "gulp-eslint": "^2.0.0",
     "istanbul": "^0.4.2",
-    "lodash": "^4.6.1",
     "mocha": "^2.4.5",
     "rimraf": "^2.5.2"
+  },
+  "dependencies": {
+    "lodash": "^4.6.1"
   }
 }
